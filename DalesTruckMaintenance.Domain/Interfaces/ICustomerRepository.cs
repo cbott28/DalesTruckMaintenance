@@ -9,8 +9,9 @@ namespace DalesTruckMaintenance.Domain.Interfaces
 {
     public interface ICustomerRepository
     {
-        CustomerDto GetById(string customerId);
+        CustomerDto GetCustomerById(string customerId);
         CustomerDto CreateCustomer(CustomerDto customerDto);
         CustomerDto UpdateCustomer(CustomerDto customerDto);
+        IReadOnlyList<CustomerDto> GetListOfCustomers();
     }
 }

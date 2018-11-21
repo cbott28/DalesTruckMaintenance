@@ -1,0 +1,10 @@
+Z:\DalesTruckMaintenance-master\DalesTruckMaintenance.Domain\bin\Debug\DalesTruckMaintenance.Domain.dll
+Z:\DalesTruckMaintenance-master\DalesTruckMaintenance.Domain\bin\Debug\DalesTruckMaintenance.Domain.pdb
+Z:\DalesTruckMaintenance-master\DalesTruckMaintenance.Domain\bin\Debug\AutoMapper.dll
+Z:\DalesTruckMaintenance-master\DalesTruckMaintenance.Domain\bin\Debug\System.ValueTuple.dll
+Z:\DalesTruckMaintenance-master\DalesTruckMaintenance.Domain\bin\Debug\AutoMapper.pdb
+Z:\DalesTruckMaintenance-master\DalesTruckMaintenance.Domain\bin\Debug\AutoMapper.xml
+Z:\DalesTruckMaintenance-master\DalesTruckMaintenance.Domain\bin\Debug\System.ValueTuple.xml
+Z:\DalesTruckMaintenance-master\DalesTruckMaintenance.Domain\obj\Debug\DalesTruckMaintenance.Domain.csprojResolveAssemblyReference.cache
+Z:\DalesTruckMaintenance-master\DalesTruckMaintenance.Domain\obj\Debug\DalesTruckMaintenance.Domain.dll
+Z:\DalesTruckMaintenance-master\DalesTruckMaintenance.Domain\obj\Debug\DalesTruckMaintenance.Domain.pdb

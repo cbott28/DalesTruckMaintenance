@@ -17,9 +17,9 @@ namespace DalesTruckMaintenance.Domain
             _customerRepository = customerRepository;
         }
 
-        public Customer GetById(string customerId)
+        public Customer GetCustomerById(string customerId)
         {
-            var customerDto = _customerRepository.GetById(customerId);
+            var customerDto = _customerRepository.GetCustomerById(customerId);
             var customer = ConvertDtoToCustomer(customerDto);
 
             return customer;
@@ -41,6 +41,20 @@ namespace DalesTruckMaintenance.Domain
             customer = ConvertDtoToCustomer(customerDto);
 
             return customer;
+        }
+
+        public IReadOnlyList<Customer> GetListOfCustomers()
+        {
+            var customerDtos = _customerRepository.GetListOfCustomers();
+            var customers = new List<Customer>();
+
+            foreach (var customerDto in customerDtos)
+            {
+                var customer = ConvertDtoToCustomer(customerDto);
+                customers.Add(customer);
+            }
+
+            return customers;
         }
 
         private Customer ConvertDtoToCustomer(CustomerDto customerDto)

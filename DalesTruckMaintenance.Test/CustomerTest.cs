@@ -4,6 +4,7 @@ using DalesTruckMaintenance.Domain.DTOs;
 using DalesTruckMaintenance.Domain.Exceptions;
 using DalesTruckMaintenance.Domain.Interfaces;
 using FakeItEasy;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DalesTruckMaintenance.Test
@@ -35,14 +36,14 @@ namespace DalesTruckMaintenance.Test
             _customerRepository = A.Fake<ICustomerRepository>();
             _customerService = new CustomerService(_customerRepository);
 
-            A.CallTo(() => _customerRepository.GetById(ValidCustomerId)).Returns(new CustomerDto()
+            A.CallTo(() => _customerRepository.GetCustomerById(ValidCustomerId)).Returns(new CustomerDto()
             {
                 CustomerId = ValidCustomerId,
                 Name = ValidCustomerName
             });
 
 
-            A.CallTo(() => _customerRepository.GetById(InvalidCustomerId)).Throws(new CustomerNotFoundException());
+            A.CallTo(() => _customerRepository.GetCustomerById(InvalidCustomerId)).Throws(new CustomerNotFoundException());
 
             A.CallTo(() => _customerRepository.CreateCustomer(A<CustomerDto>.That.Matches(x => x.Name == ValidCustomerName)))
                 .Returns(new CustomerDto()
@@ -63,13 +64,20 @@ namespace DalesTruckMaintenance.Test
 
             A.CallTo(() => _customerRepository.UpdateCustomer(A<CustomerDto>.That.Matches(x => x.CustomerId == InvalidCustomerId ||
                 x.Name == null || x.Name.Length == 0))).Throws(new InvalidCustomerException());
+
+            A.CallTo(() => _customerRepository.GetListOfCustomers()).Returns(new List<CustomerDto>() {
+                new CustomerDto() {
+                    CustomerId = ValidCustomerId,
+                    Name = ValidCustomerName
+                }
+            });
         }
 
         [TestMethod]
-        public void GetById_ValidId_ReturnsCustomer()
+        public void GetCustomerById_ValidId_ReturnsCustomer()
         {
             //Act
-            var customer = _customerService.GetById(ValidCustomerId);
+            var customer = _customerService.GetCustomerById(ValidCustomerId);
 
             //Assert
             Assert.IsInstanceOfType(customer, typeof(Customer));
@@ -78,10 +86,10 @@ namespace DalesTruckMaintenance.Test
         }
 
         [TestMethod, ExpectedException(typeof(CustomerNotFoundException))]
-        public void GetById_InvalidId_ThrowsException()
+        public void GetCustomerById_InvalidId_ThrowsException()
         {
             //Act
-            var customer = _customerService.GetById(InvalidCustomerId);
+            var customer = _customerService.GetCustomerById(InvalidCustomerId);
         }
 
         [TestMethod]
@@ -130,6 +138,16 @@ namespace DalesTruckMaintenance.Test
             Assert.IsInstanceOfType(customer, typeof(Customer));
             Assert.IsTrue(customer.CustomerId == ValidCustomer.CustomerId);
             Assert.IsTrue(customer.Name.Length > 0);
+        }
+
+        [TestMethod]
+        public void GetListOfCustomers_Void_ReturnsCustomers()
+        {
+            //Act
+            var customers = _customerService.GetListOfCustomers();
+
+            //Assert
+            Assert.IsInstanceOfType(customers, typeof(IReadOnlyList<Customer>));
         }
     }
 }
